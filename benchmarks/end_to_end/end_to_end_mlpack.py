@@ -72,7 +72,7 @@ if __name__ == "__main__":
 
     with Timer() as timer:
         result = mlpack.kmeans(
-            input=data_transposed,
+            input_=data_transposed,
             clusters=num_centroids,
             algorithm=variant,
             max_iterations=n_iter,
