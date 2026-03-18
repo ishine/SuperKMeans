@@ -69,7 +69,7 @@ int main(int argc, char* argv[]) {
     const size_t n = it->second.first;
     const size_t d = it->second.second;
     const size_t n_clusters = bench_utils::get_default_n_clusters(n);
-    const int n_iters = bench_utils::MAX_ITERS;
+    const int n_iters = 10; // bench_utils::MAX_ITERS;
     const size_t THREADS = omp_get_max_threads();
     omp_set_num_threads(THREADS);
 
