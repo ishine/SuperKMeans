@@ -84,7 +84,7 @@ if __name__ == "__main__":
     print(f"\nTraining completed in {construction_time_ms:.2f} ms")
     print(f"centroid shape: {result['centroid'].shape}")
     print(f"output shape: {result['output'].shape}")
-    exit()
+    # exit()
 
     # Extract centroids: mlpack returns (d, k) column-major -> transpose to (k, d) row-major
     centroids = result['centroid'].astype(np.float32)
