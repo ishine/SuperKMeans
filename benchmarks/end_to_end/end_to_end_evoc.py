@@ -64,7 +64,7 @@ if __name__ == "__main__":
             data,
             # base_min_cluster_size=100,
             approx_n_clusters=num_centroids,
-            n_epochs=25,
+            n_epochs=10,
             random_state=42,
             max_layers=1,
         )
