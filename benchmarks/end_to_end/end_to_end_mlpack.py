@@ -46,7 +46,7 @@ if __name__ == "__main__":
             f"Choose from {list(DATASET_PARAMS.keys())}"
         )
     num_vectors, num_dimensions = DATASET_PARAMS[dataset]
-    num_centroids = 100 # get_default_n_clusters(num_vectors)
+    num_centroids = get_default_n_clusters(num_vectors)
     n_iter = 10 # MAX_ITERS
     threads = threads
 
@@ -84,7 +84,6 @@ if __name__ == "__main__":
     print(f"\nTraining completed in {construction_time_ms:.2f} ms")
     print(f"centroid shape: {result['centroid'].shape}")
     print(f"output shape: {result['output'].shape}")
-    # exit()
 
     # Extract centroids: mlpack returns (d, k) column-major -> transpose to (k, d) row-major
     centroids = result['centroid'].astype(np.float32)
