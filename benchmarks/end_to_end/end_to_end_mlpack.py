@@ -77,6 +77,7 @@ if __name__ == "__main__":
             algorithm=variant,
             max_iterations=n_iter,
             seed=42,
+            labels_only=True,
         )
     construction_time_ms = timer.get_milliseconds()
 
