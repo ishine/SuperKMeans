@@ -17,6 +17,7 @@
 #include "sort_kmeans.h"
 #include "heap_kmeans.h"
 #include "compare_kmeans.h"
+#include "beta_hamerly_kmeans.h"
 
 #include "bench_utils.h"
 
@@ -29,6 +30,7 @@ const std::unordered_map<std::string, std::string> VALID_ALGORITHMS = {
     {"sort", "SortKmeans"},
     {"heap", "HeapKmeans"},
     {"compare", "CompareKmeans"},
+    {"beta_hamerly", "BetaHamerlyKmeans"},
 };
 
 Kmeans* create_algorithm(const std::string& variant, size_t n_clusters) {
@@ -44,6 +46,7 @@ Kmeans* create_algorithm(const std::string& variant, size_t n_clusters) {
     if (variant == "sort")    return new SortKmeans();
     if (variant == "heap")    return new HeapKmeans();
     if (variant == "compare") return new CompareKmeans();
+    if (variant == "beta_hamerly") return new BetaHamerlyKmeans();
     return nullptr;
 }
 
@@ -55,7 +58,7 @@ int main(int argc, char* argv[]) {
     auto alg_it = VALID_ALGORITHMS.find(variant);
     if (alg_it == VALID_ALGORITHMS.end()) {
         std::cerr << "Unknown algorithm variant '" << variant << "'\n";
-        std::cerr << "Choose from: naive, hamerly, elkan, annulus, drake, sort, heap, compare\n";
+        std::cerr << "Choose from: naive, hamerly, elkan, annulus, drake, sort, heap, compare, beta_hamerly\n";
         return 1;
     }
     const std::string algorithm = "fast_kmeans_" + variant;
