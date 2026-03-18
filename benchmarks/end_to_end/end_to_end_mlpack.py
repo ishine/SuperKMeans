@@ -78,7 +78,9 @@ if __name__ == "__main__":
             max_iterations=n_iter,
             seed=42,
             labels_only=True,
-            verbose=True
+            verbose=True,
+            kmeans_plus_plus=False,
+            refined_start=False
         )
     construction_time_ms = timer.get_milliseconds()
     print(f"\nTraining completed in {construction_time_ms:.2f} ms")
