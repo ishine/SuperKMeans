@@ -67,12 +67,12 @@ if __name__ == "__main__":
         print(f"\nWARNING: Dataset '{dataset}' should use spherical k-means, "
               f"but mlpack does not support this. Results may be suboptimal.")
 
-    # mlpack expects data as (num_dimensions, num_vectors) in Fortran (column-major) order
-    data_transposed = np.asfortranarray(data.T, dtype=np.float64)
+    # mlpack Python binding transposes internally; pass (n, d) row-major
+    data_f64 = data.astype(np.float64)
 
     with Timer() as timer:
         result = mlpack.kmeans(
-            input_=data_transposed,
+            input_=data_f64,
             clusters=num_centroids,
             algorithm=variant,
             max_iterations=n_iter,
