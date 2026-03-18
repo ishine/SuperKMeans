@@ -81,6 +81,7 @@ if __name__ == "__main__":
             verbose=True
         )
     construction_time_ms = timer.get_milliseconds()
+    print(f"\nTraining completed in {construction_time_ms:.2f} ms")
     print(f"centroid shape: {result['centroid'].shape}")
     print(f"output shape: {result['output'].shape}")
     exit()
@@ -97,7 +98,6 @@ if __name__ == "__main__":
     diffs = data - centroids[assignments]
     final_objective = float(np.sum(diffs ** 2))
 
-    print(f"\nTraining completed in {construction_time_ms:.2f} ms")
     print(f"Actual iterations: {actual_iterations} (requested: {n_iter})")
     print(f"Final objective (inertia): {final_objective}")
 
