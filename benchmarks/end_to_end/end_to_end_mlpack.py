@@ -78,8 +78,12 @@ if __name__ == "__main__":
             max_iterations=n_iter,
             seed=42,
             labels_only=True,
+            verbose=True
         )
     construction_time_ms = timer.get_milliseconds()
+    print(f"centroid shape: {result['centroid'].shape}")
+    print(f"output shape: {result['output'].shape}")
+    exit()
 
     # Extract centroids: mlpack returns (d, k) column-major -> transpose to (k, d) row-major
     centroids = result['centroid'].astype(np.float32)
