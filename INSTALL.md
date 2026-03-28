@@ -1,12 +1,34 @@
 # Installation
 
-### PyPI
-We are available in PyPI. However, we recommend installing from source for maximum performance.
+## Python 
+With `pip`:
 ```sh
 pip install superkmeans
 ```
 
-### Super K-Means on CPU needs:
+## C++
+As a header-only library with CMake `FetchContent`:
+
+```cmake
+FetchContent_Declare(
+    superkmeans
+    GIT_REPOSITORY https://github.com/cwida/superkmeans
+)
+FetchContent_MakeAvailable(superkmeans)
+
+target_link_libraries(myapp PRIVATE superkmeans)
+```
+
+CMake options:
+- `-DSKMEANS_MARCH`: `-march` value to use during SuperKMeans compilation (default=`native`).
+- `-DBLAS_LIBRARIES`: Full path name of BLAS library to use. Useful if you want to link SuperKMeans against a different BLAS implementation. For example, if you have installed AMD BLIS: `-DBLAS_LIBRARIES=/opt/amd-blis/lib/libblis-mt.so`
+
+> [!TIP]
+> BLAS is critical to achieve high performance. In Linux, we recommend [installing OpenBLAS from source](#installing-blas). 
+
+## From source
+
+#### Super K-Means on CPU needs:
 - Clang 17, CMake 3.26
 - OpenMP
 - A BLAS implementation
@@ -131,18 +153,6 @@ Solution: Install `python-dev` package:
 sudo apt install python3-dev
 ```
 
-### I get a bunch of `warnings` when compiling SuperKMeans
-
-If you see a lot of warnings like this one:
-```warning: ignoring ‘#pragma clang loop’```
-
-You are using GCC instead of Clang. If you installed Clang, you can set the correct compiler by doing the following:
-```sh
-export CXX="/usr/bin/clang++-18" # Linux
-
-export CXX="/opt/homebrew/opt/llvm/bin/clang++" # MacOS
-```
-
 
 ### Super K-Means is slow on my Apple Silicon
 If you previously installed OpenBLAS in your machine, the installation may be linking to OpenBLAS instead of Apple Accelerate. You can try forcing the linking of Apple Accelerate: 
@@ -212,4 +222,4 @@ make TARGET=NEOVERSEV1 DYNAMIC_ARCH=0 USE_OPENMP=1 NUM_THREADS=128
 Yes. We have optimizations for AVX512, AVX2, and NEON. You don't need to do anything special to activate these. If your machine doesn't have any of these, we rely on scalar code. 
 
 ## GPU 
-Looking for installation on GPU? We have an implementation (see `legacy_gpu` branch)! But the installation instructions are still WiP.
+Looking for installation on GPU? We have an implementation (see `gpu` branch)! But the installation instructions are still WiP.
